@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Library Management System</title>
+    <link rel="stylesheet" type="text/css" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=PT+Serif&display=swap" rel="stylesheet">
+    
+    <style>
+        /* Responsive CSS */
+        @media screen and (max-width: 768px) {
+            /* Adjust the layout for smaller screens */
+            .container {
+                padding: 20px; /* Increase padding for smaller screens */
+                max-width: 100%; /* Make the container width 100% for smaller screens */
+            }
+
+            .header {
+                font-size: 28px; /* Decrease header font size for smaller screens */
+            }
+
+            .label {
+                font-size: 16px; /* Decrease label font size for smaller screens */
+            }
+
+            .radio-button label {
+                font-size: 16px; /* Decrease radio button label font size for smaller screens */
+            }
+
+            .button {
+                font-size: 16px; /* Decrease button font size for smaller screens */
+            }
+        }
+    </style>
+</head>
+
+
+<body>
+    <div class="popup" id="popup">
+        <p id="popupMessage"></p>
+    </div>
+    
+    <div class="container">
+        <div class="header">VARDHAMAN COLLEGE OF ENGINEERING</div>
+        <div class="label">SELECT YOUR SEMESTER</div>
+        <div id="semesterPanel"></div>
+        <button class="button" onclick="showBranchSelection()">Go</button>
+    </div>
+
+    <script>
+        const semesters = ["First Semester", "Second Semester", "Third Semester", "Fourth Semester", "Fifth Semester", "Sixth Semester", "Seventh Semester", "Eighth Semester"];
+
+        function createRadioButtons(containerId, options) {
+            const container = document.getElementById(containerId);
+            container.innerHTML = "";
+            options.forEach((option, index) => {
+                const radio = document.createElement("input");
+                radio.type = "radio";
+                radio.name = "semesterRadio";
+                radio.value = option;
+                radio.id = `semesterRadio${index}`;
+                const label = document.createElement("label");
+                label.textContent = option;
+                label.htmlFor = `semesterRadio${index}`;
+                container.appendChild(radio);
+                container.appendChild(label);
+                container.appendChild(document.createElement("br"));
+            });
+        }
+
+        createRadioButtons("semesterPanel", semesters);
+
+        
+    function showPopup(message) {
+    const popup = document.getElementById("popup");
+    const popupMessage = document.getElementById("popupMessage");
+    popupMessage.textContent = message;
+    popup.style.display = "block";
+    
+    setTimeout(() => {
+        popup.style.display = "none";
+    }, 3000);
+}
+
+function showBranchSelection() {
+    const selectedSemester = document.querySelector('input[name="semesterRadio"]:checked');
+    if (selectedSemester) {
+        const selectedSemesterValue = selectedSemester.value;
+        const branches = ["COMPUTER SCIENCE AND ENGINEERING", "ARTIFICIAL INTELLIGENCE AND MACHINE LEARNING", "CIVIL ENGINEERING", "ARTIFICIAL INTELLIGENCE AND DATA SCIENCE"];
+        createRadioButtons("semesterPanel", []);
+        document.querySelector(".label").textContent = "SELECT YOUR BRANCH";
+        createRadioButtons("semesterPanel", branches);
+        const goButton = document.querySelector(".button");
+        goButton.textContent = "Go";
+        goButton.onclick = () => {
+            const selectedBranch = document.querySelector('input[name="semesterRadio"]:checked');
+            if (selectedBranch) {
+                const selectedBranchValue = selectedBranch.value;
+                const courses = getCourseArray(selectedSemesterValue, selectedBranchValue);
+                if (courses.length > 0) {
+                    showCourseSelection(courses);
+                } else {
+                    showPopup("Please select a semester and branch.");
+                }
+            } else {
+                showPopup("Please select a branch.");
+            }
+        };
+    } else {
+        showPopup("Please select a semester.");
+    }
+}
+
+
+        function getCourseArray(semester, branch) {
+            // Define your course arrays here based on semester and branch
+            // Example: For the first semester and Computer Science branch
+            if (semester === "First Semester" && branch === "COMPUTER SCIENCE AND ENGINEERING") {
+                return ["Matrices and Calculus", "Engineering Chemistry", "Problem Solving through C", "English for Skill Enhancement", "Digital Electronics", "Computer Aided Drawing", "Social Innovation"];
+            }
+            // Add more conditions as needed
+            if (semester === "Second Semester" && branch === "COMPUTER SCIENCE AND ENGINEERING") {
+                return ["Ordinary Differential Equations and Vector Calculus", "Applied Physics",
+                    "Basic Electrical Engineering", "Data Structures", "Computer Organization", "Engineering Workshop",
+                    "Engineering Exploration", "Python programing"];
+            }
+            if (semester === "Third Semester" && branch === "COMPUTER SCIENCE AND ENGINEERING") {
+                return ["Business Economics and Financial Analysis", "Discrete Mathematical Structures",
+                    "Fundamentals of IoT and Robotics", "Object Oriented Programming", "Database Management Systems",
+                    "Advanced Data Structures", "Engineering Design Thinking", "Environmental Science and Technology"];
+            }
+            if (semester === "Fourth Semester" && branch === "COMPUTER SCIENCE AND ENGINEERING") {
+             return ["Computer Oriented Statistical Methods", "Design and Analysis of Algorithms",
+                    "Operating Systems ", "Formal Languages and Automata Theory", "Web Technologies", "Product Realization ",
+                    "Gender Sensitization", "Universal Human Values 2 :Understanding Harmony", "Python for Data Science"];   
+            }
+            if (semester === "Fifth Semester" && branch === "COMPUTER SCIENCE AND ENGINEERING") {
+                return ["Machine Learning", "Computer Networks", "Software Engineering ", "Compiler Design",
+                    "Mobile Application Development", "Professional Communication Skills", "Research Methodology"];
+            }
+            if (semester === "Sixth Semester" && branch === "COMPUTER SCIENCE AND ENGINEERING") {
+                return ["Big Data Analytics", "Deep Learning", "Information Security",
+                    "Java Script Technologies", "Indian Constitution"];
+            }
+            if (semester === "Seventh Semester" && branch === "COMPUTER SCIENCE AND ENGINEERING") {
+                return ["Cloud Computing and Virtualisation", "Data Analytics using R"];
+            }
+            if (semester === "Eight Semester" && branch === "COMPUTER SCIENCE AND ENGINEERING") {
+                return ["Project work and Internship No Need to Select"];
+            }
+            if (semester === "First Semester" && branch === "ARTIFICIAL INTELLIGENCE AND MACHINE LEARNING") {
+                return ["Matrices and Calculus", "Engineering Chemistry ", "English for Skill Enhancement",
+                    "Problem Solving through C", "Digital Electronics", "Computer Aided Drawing", "Social Innovation"];
+            }
+            if (semester === "Second Semester" && branch === "ARTIFICIAL INTELLIGENCE AND MACHINE LEARNING") {
+                return ["Ordinary Differential Equations and Vector Calculus", "Applied Physics",
+                    "Basic Electrical Engineering", "Foundations of Data Science", "Data Structures", "Engineering Workshop",
+                    "Python Programming", "Engineering Exploration"];
+            }
+            if (semester === "Third Semester" && branch === "ARTIFICIAL INTELLIGENCE AND MACHINE LEARNING") {
+                return ["Business Economics and Financial Analysis", "Discrete Mathematical Structure",
+                    "Operating Systems", "Computer Organization and Architecture", "Object Oriented Programming",
+                    "Data Visualization", "Robotic Process Automation", "Engineering Design Thinking "];
+            }
+            if (semester === "Fourth Semester" && branch === "ARTIFICIAL INTELLIGENCE AND MACHINE LEARNING") {
+                return ["Computer Oriented Statistical Method", "Formal Language and Automata Theory",
+                    "Database Management Systems", "Introduction to Artificial Intelligence ",
+                    "Design and Analysis of Algorithms", "Introduction to Web Technology", "Product Realization",
+                    "Gender Sensitization", "Universal Human Values 2:Understanding Harmony"];
+            }
+            if (semester === "Fifth Semester" && branch === "ARTIFICIAL INTELLIGENCE AND MACHINE LEARNING") {
+                return ["Cloud Computing and Virtualisation", "Data Anaytics using R", "Compiler Design",
+                    "Applications of AI", "Full Stack Development", "Professional Communication Skills", "Research Methodology"];
+            }
+            if (semester === "Sixth Semester" && branch === "ARTIFICIAL INTELLIGENCE AND MACHINE LEARNING") {
+                return ["Machine Learning", "Soft Computing Techniques", "Computer Networks", "Dev Ops Tools ",
+                    "Indian Constitution"];
+            }
+            if (semester === "Seventh Semester" && branch === "ARTIFICIAL INTELLIGENCE AND MACHINE LEARNING") {
+                return ["Natural Language Processing ", "Deep Learning"];
+            }
+            if (semester === "Eighth Semester" && branch === "ARTIFICIAL INTELLIGENCE AND MACHINE LEARNING") {
+                 return ["Project work and Internship No Need to Select"];
+            }
+            if (semester === "First Semester" && branch === "CIVIL ENGINEERING") {
+                return ["Matrices and Calculus", "Applied Physics", "C Programming and Data Structures",
+                    "Construction Materials", "Engineering Drawing", "Engineering Workshop", "Social Innovation"];
+            }
+            if (semester === "Second Semester" && branch === "CIVIL ENGINEERING") {
+                return ["Ordinary Differential Equations and Vector Calculus", "Engineering Chemistry ",
+                    "English for Skill Enhancement", "Engineering Geology ", "Applied Mechanics", "Python Programming",
+                    "Engineering Exploration"];
+            }
+            if (semester === "Third Semester" && branch === "CIVIL ENGINEERING") {
+                return ["Probability Distributions and Statistics", "Building Construction and Planning",
+                    "Strength of Materials - I", "Surveying ", "Fluid Mechanics", "Computer Aided Drafting",
+                    "Engineering Design Thinking", "Gender Sensitization", "Universal Human Values 2:Understanding Harmony"];
+            }
+            if (semester === "Fourth Semester" && branch === "CIVIL ENGINEERING") {
+                return ["Business Economics and Financial Analysis", "Strength of Materials - II",
+                    "Hydraulics and Hydraulic Machines", "Concrete Technology ", "Structural Analysis", "Product Realization",
+                    "Environmental Science and Technology"];
+            }
+            if (semester === "Fifth Semester" && branch === "CIVIL ENGINEERING") {
+                return ["Design of Reinforced Concrete Structures", "Water Resources Engineering ",
+                    "Geotechnical Engineering", "Transportation Engineering - I", "Civil Engineering Software",
+                    "Indian Constitution"];
+            }
+            if (semester === "Sixth Semester" && branch === "CIVIL ENGINEERING") {
+                return ["Design of Steel Structures", "Transportation Engineering - II",
+                    "Environmental Engineering", "Structural Analysis and Design", "Professional Communication Skills",
+                    "Research Methodology"];
+            }
+            if (semester === "Seventh Semester" && branch === "CIVIL ENGINEERING") {
+                return ["Remote Sensing and GIS", "Construction Management", "Building Information Modeling"];
+            }
+            if (semester === "Eighth Semester" && branch === "CIVIL ENGINEERING") {
+                 return ["Project work and Internship No Need to Select"];
+            }
+            if (semester === "First Semester" && branch === "ARTIFICIAL INTELLIGENCE AND DATA SCIENCE") {
+                return ["Matrices and Calculus", "Engineering Chemistry ", "English for Skill Enhancement ",
+                    "Problem Solving through C", "Introduction to Data Science", "Computer Aided Drawing",
+                    "Social Innovation"];
+            }
+            if (semester === "Second Semester" && branch === "ARTIFICIAL INTELLIGENCE AND DATA SCIENCE") {
+                return ["Ordinary Differential Equations and Vector Calculus", "Applied Physics",
+                    "Basic Electrical Engineering ", "Data Structures", "Computer Organization", "Engineering Workshop ",
+                    "Python Programming", "Engineering Exploration"];
+            }
+            if (semester === "Third Semester" && branch === "ARTIFICIAL INTELLIGENCE AND DATA SCIENCE") {
+                return ["Business Economics and Financial Analysis", "Discrete Mathematical Structures",
+                    "Database Management Systems", "Artificial Intelligence Principles and Techniques", "Data Wrangling",
+                    "Introduction to Web Technology", "Engineering Design Thinking"];
+            }
+            if (semester === "Fourth Semester" && branch === "ARTIFICIAL INTELLIGENCE AND DATA SCIENCE") {
+                return ["Computer Oriented Statistical Methods ", "Software Engineering",
+                    "Fundamentals of IoT and Robotics", "Object Oriented Programming", "Operating Systems",
+                    "Product Realization"];
+            }
+            if (semester === "Fifth Semester" && branch === "ARTIFICIAL INTELLIGENCE AND DATA SCIENCE") {
+                return ["Design and Analysis of Algorithms ", "Data Analytics", "Machine Learning ",
+                    "Robotic Process Automation", "Professional Communication Skills", "Research Methodology "];
+            }
+            if (semester === "Sixth Semester" && branch === "ARTIFICIAL INTELLIGENCE AND DATA SCIENCE") {
+                return ["Cloud Computing and Virtualisation", "Full Stack Development", "Computer Networks ",
+                    "CASE Tools"];
+            }
+            if (semester === "Seventh Semester" && branch === "ARTIFICIAL INTELLIGENCE AND DATA SCIENCE") {
+                return ["Natural Language Processing", "Web and Social Media Analytics", "AR/VR Laboratory"];
+            }
+            if (semester === "Eighth Semester" && branch === "ARTIFICIAL INTELLIGENCE AND DATA SCIENCE") {
+                 return ["Project work and Internship No Need to Select"];
+            }
+            return [];
+        }
+
+        function showCourseSelection(courses) {
+            const container = document.querySelector(".container");
+            container.innerHTML = "";
+            const courseLabel = document.createElement("div");
+            courseLabel.className = "label";
+            courseLabel.textContent = "SELECT YOUR COURSE";
+            container.appendChild(courseLabel);
+
+            courses.forEach((course, index) => {
+                const radio = document.createElement("input");
+                radio.type = "radio";
+                radio.name = "courseRadio";
+                radio.value = course;
+                radio.id = `courseRadio${index}`;
+                const label = document.createElement("label");
+                label.textContent = course;
+                label.htmlFor = `courseRadio${index}`;
+                container.appendChild(radio);
+                container.appendChild(label);
+                container.appendChild(document.createElement("br"));
+            });
+
+            const submitButton = document.createElement("button");
+            submitButton.className = "button";
+            submitButton.textContent = "Submit";
+            submitButton.onclick = () => {
+                const selectedCourse = document.querySelector('input[name="courseRadio"]:checked');
+                if (selectedCourse) {
+                    const selectedCourseValue = selectedCourse.value;
+                    // Perform actions with the selected course
+                    console.log("Selected course:", selectedCourseValue);
+                    // You can add more logic here
+                }
+            };
+            container.appendChild(submitButton);
+        }
+    </script>
+</body>
+
+</html>

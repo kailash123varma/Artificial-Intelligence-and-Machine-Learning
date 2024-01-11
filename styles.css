@@ -1,0 +1,103 @@
+
+body, h1, h2, p, ul, li {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'PT Serif', serif;
+    background-image: linear-gradient(rgb(0, 0, 0, 0.4), rgb(0, 0, 0, 0.4)), url('2.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    color: #faf0ab;
+    display: flex;
+    justify-content: center;
+    align-items: center; 
+    min-height: 100vh;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px rgb(0, 0, 0, 0.2);
+    padding: 30px;
+    max-width: 500px;
+}
+
+.header {
+    font-size: 36px;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+.label {
+    font-size: 25px;
+    color: #faf0ab;
+    font-weight: 100;
+    margin-bottom: 10px;
+}
+
+/*.radio-button label {
+    display: inline-flex;
+    align-items: center;
+    cursor: pointer;
+    color: #faf0ab;
+    transition: color 0.3s ease;
+}
+
+.radio-button input[type="radio"] {
+    display: none;
+}
+
+.radio-button label:before {
+    content: '';
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    margin-right: 10px;
+    border: 2px solid #fff;
+    border-radius: 50%;
+    background-color: transparent;
+    transition: background-color 0.3s ease;
+}
+
+.radio-button input[type="radio"]:checked + label:before {
+    background-color: #fff;
+}*/
+
+.button {
+    margin-top: 15px;
+    padding: 10px 20px;
+    background-image: url('wood-texture.jpg');
+    background-size: cover;
+    color: #faf0ab;
+    font-size: 18px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+.button:hover {
+    transform: scale(1.05);
+}
+
+.popup {
+    display: none;
+    position: fixed;
+    top: 20px;
+    left: 42%;
+    padding: 10px 20px;
+    background-color: #333;
+    color: #faf0ab;
+    border-radius: 5px;
+    box-shadow: 0px 0px 10px rgb(0, 0, 0, 0.5);
+    z-index: 9999;
+}
+
+
